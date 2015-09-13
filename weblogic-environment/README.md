@@ -12,12 +12,9 @@ With this dockerfile, it will build an environment consists of below softwares.
 ---
 ## URL
 This is a default weblogic admin console URL.
-```
-URL:
-  http://localhost:7001/console
-ID/password:
-  weblogic/weblogic123
-```
+* http://localhost:7001/console
+* ID = weblogic
+* Password = weblogic123
 
 ---
 ## Installation
