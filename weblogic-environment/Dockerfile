@@ -16,9 +16,9 @@
 # ----------------------------------------------------
 
 # Pull base image.
-FROM fedora:latest
+FROM oraclelinux:6
 
-MAINTAINER emoken "https://github.com/emoken"
+MAINTAINER guok "https://github.com/barryguda-1"
 
 # Update and install
 RUN [ "yum", "update",                                "-y" ]
@@ -43,6 +43,7 @@ RUN [ "yum", "install", "redhat-lsb-core.x86_64",     "-y" ]
 RUN [ "yum", "install", "sysstat.x86_64",             "-y" ]
 RUN [ "yum", "install", "tmux.x86_64",                "-y" ]
 RUN [ "yum", "install", "vsftpd.x86_64",              "-y" ]
+RUN [ "yum", "install", "vim-enhanced",               "-y" ]
 
 # ----------------------------------------------------
 #  Install Java
@@ -55,21 +56,20 @@ WORKDIR /u02/app/oracle/product
 
 #Add java to docker
 #ADD jdk-7u79-linux-x64.rpm ./jdk-7u79-linux-x64.rpm
-RUN wget https://dl.dropboxusercontent.com/u/10127753/jdk-7u79-linux-x64.rpm
-
+RUN wget https://www.dropbox.com/s/67mddrwhb6fhaq5/jdk-7u79-linux-x64.rpm
 #Copy with sucess
 RUN echo "jdk copy sucess"
 RUN chmod +x jdk-7u79-linux-x64.rpm
 RUN ls -la /u02/app/oracle/product
 
 # Install Java.
-RUN rpm -Uvh jdk-7u79-linux-x64.rpm 
+RUN rpm -ivh jdk-7u79-linux-x64.rpm 
 
 #Remove installer 
 RUN rm -rf jdk-7u79-linux-x64.rpm
 
 # Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
+ENV JAVA_HOME /usr/java/default
 
 # ----------------------------------------------------
 #  Install Weblogic Server
@@ -87,7 +87,7 @@ RUN groupadd dba      -g 502 && \
 ADD silent.xml          /u01/app/oracle/silent.xml
 
 WORKDIR /u01/app/oracle/
-RUN wget https://dl.dropboxusercontent.com/u/10127753/wls1036_generic.jar
+RUN wget https://www.dropbox.com/s/pbhwgfin6msbknd/wls1036_generic.jar
 
 # Set permission
 
@@ -113,7 +113,7 @@ ADD entrypoint.sh /u01/app/oracle/product/fmw/
 
 RUN [ "chmod", "a+x", "/u01/app/oracle/product/fmw/change_weblogic_password.sh", "/u01/app/oracle/product/fmw/entrypoint.sh" ]
 
-ENTRYPOINT [ "/u01/app/oracle/product/fmw/entrypoint.sh", "AdminServer", "weblogic123" ]
+ENTRYPOINT [ "/u01/app/oracle/product/fmw/entrypoint.sh", "AdminServer", "weblogic1234" ]
 
 EXPOSE 7001
 EXPOSE 22
