@@ -51,7 +51,7 @@ cmo.setProductionModeEnabled(false)
 cmo.setInternalAppsDeployOnDemandEnabled(true)
 cd('Security/base_domain/User/weblogic')
 # Please set password here before using this script, e.g. cmo.setPassword('value')
-cmo.setPassword('weblogic123')
+cmo.setPassword('weblogic1234')
 
 #=======================================================================================
 # Write the domain and close the domain template.
@@ -64,14 +64,14 @@ closeTemplate()
 #=======================================================================================
 # Set Admin Server Options
 #=======================================================================================
-#startServer('AdminServer','basicWLSSDomain','localhost:7001', 'weblogic',' weblogic123','/u01/app/oracle/middleware/user_projects/domains/basicWLSSDomain',' true')
-#connect('weblogic', 'weblogic123', 'localhost:7001')
-#edit()
-#startEdit()
+startServer('AdminServer','basicWLSSDomain','localhost:7001', 'weblogic',' weblogic1234','/u01/app/oracle/middleware/user_projects/domains/basicWLSSDomain',' true')
+connect('weblogic', 'weblogic1234', 'localhost:7001')
+edit()
+startEdit()
 #cmo.setProductionModeEnabled(true)
 #cmo.setInternalAppsDeployOnDemandEnabled(false)
-#activate()
-#disconnect()
+activate()
+disconnect()
 
 #=======================================================================================
 # Exit WLST.
